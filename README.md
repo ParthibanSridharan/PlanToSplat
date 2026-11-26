@@ -24,3 +24,58 @@ Browser-First 3D Real Estate Reconstruction &amp; Interactive Virtual Staging  T
 ---
 
 ## 🏗️ System Architecture
+                  [ 2D Multi-View Photos / Video ]
+                                  │
+                                  ▼
+                    [ Client Image Ingestion ]
+                ├── Blur Filter (Laplacian Variance)
+                └── EXIF Metadata Parsing
+                                  │
+                                  ▼
+                  [ Asynchronous Reconstruct Engine ]
+        ┌─────────────────────────┴─────────────────────────┐
+        │                                                   │
+        ▼                                                   ▼
+[ Sparse Point Cloud Generation ]              [ Hugging Face Free API Worker ]
+(ZoeDepth / Tripo3D API - Fast)                 (3DGS COLMAP + gsplat - Full)
+│                                                   │
+└─────────────────────────┬─────────────────────────┘
+│
+▼
+[ Output: .splat / .glb ]
+│
+▼
+[ PlanToSplat Frontend Engine ]
+├── Three.js + gsplat.js (WebGPU Pipeline)
+├── Interactive Raycaster (Furniture Placement & Measuring)
+└── Nipple.js Mobile Touch Virtual Joysticks
+
+
+---
+
+## 🛠️ Tech Stack
+
+| Domain | Technology |
+| :--- | :--- |
+| **Frontend Framework** | [Next.js 15](https://nextjs.org/) (App Router), [React 19](https://react.dev/), [Tailwind CSS](https://tailwindcss.com/) |
+| **3D & WebGPU Engine** | [Three.js](https://threejs.org/), [gsplat.js](https://github.com/huggingface/gsplat.js) |
+| **Backend & Storage** | Next.js Serverless API Routes, [Supabase](https://supabase.com/) (PostgreSQL + Auth + Storage) |
+| **Client Utilities** | `OpenCV.js` (Image Validation), `Nipple.js` (Mobile Virtual Joysticks) |
+| **3D Asset Library API** | [Poly Pizza API](https://poly.pizza/) (Free Low-Poly Models) |
+
+---
+
+## 🚀 Quick Start
+
+### Prerequisites
+
+* **Node.js**: `v18.x` or higher
+* **Package Manager**: `npm` or `pnpm`
+* A WebGPU/WebGL2 compatible browser (Google Chrome 113+ recommended)
+
+### Installation
+
+1. **Clone the repository:**
+   ```bash
+   git clone [https://github.com/your-username/plantosplat-ai.git](https://github.com/your-username/plantosplat-ai.git)
+   cd plantosplat-ai
