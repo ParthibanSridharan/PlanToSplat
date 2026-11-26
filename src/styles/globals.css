@@ -1,0 +1,58 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+  --bg: #0f172a;
+}
+
+html,
+body {
+  background: var(--bg);
+  color: #e2e8f0;
+  -webkit-font-smoothing: antialiased;
+}
+
+@layer components {
+  .glass {
+    @apply border border-white/10 bg-slate-900/55 shadow-[0_8px_32px_rgba(0,0,0,0.35)] backdrop-blur-md;
+  }
+  .glass-strong {
+    @apply border border-white/10 bg-slate-900/80 shadow-[0_16px_48px_rgba(0,0,0,0.5)] backdrop-blur-xl;
+  }
+  .text-gradient {
+    @apply bg-gradient-to-r from-splat-300 via-aqua-300 to-splat-400 bg-clip-text text-transparent;
+  }
+  .measure-label {
+    @apply rounded-md border border-aqua-400/50 bg-ink-900/85 px-2 py-0.5 font-mono text-[11px] font-semibold text-aqua-300 shadow-lg backdrop-blur;
+    white-space: nowrap;
+    transform: translateY(-14px);
+  }
+  .measure-label--live {
+    @apply border-pink-400/50 text-pink-300;
+  }
+  .slider {
+    @apply h-1.5 w-full cursor-pointer appearance-none rounded-full bg-white/10 accent-aqua-400;
+  }
+}
+
+.bg-grid {
+  background-image: linear-gradient(rgba(148, 163, 184, 0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(148, 163, 184, 0.07) 1px, transparent 1px);
+  background-size: 44px 44px;
+}
+
+/* Nipple.js renders its own DOM; keep it above the canvas */
+.nipple {
+  z-index: 15 !important;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.25);
+  border-radius: 8px;
+}
